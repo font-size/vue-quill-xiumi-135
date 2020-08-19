@@ -1,24 +1,18 @@
-# quill-xiumi-135
+# vue-monaco-assets
 
-## Project setup
+## 简介
 ```
-npm install
+在quill中集成秀米编辑器和135编辑器。
+通过在toolbar中添加按钮，以弹窗的方式弹出秀米编辑器和135编辑器。
 ```
+<a href="http://www.lichengblog.com/demo/quill-xiumi-135/index.html" target="_blank">在线预览</a>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### 资源
 
-### Compiles and minifies for production
-```
-npm run build
-```
+<a href="https://xiumi.us/" target="_blank">秀米官网</a>
+<a href="http://www.135plat.com/open_editor.html" target="_blank">135编辑器</a>
+<a href="https://github.com/quilljs/parchment#blots" target="_blank">https://github.com/quilljs/parchment#blots</a>
 
-### Lints and fixes files
-```
-npm run lint
-```
+## License
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+<a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a>
