@@ -93,18 +93,18 @@ export default {
       this.$emit('ready', this.quill)
     },
     firstSetHtml() {
-      let nodeHtml = ''
-      let msg = ''
       if(this.value) {
         // 判断是否有秀米和或135元素
         if(this.value.indexOf('xiumi.us') > -1 || this.value.indexOf('135editor.com') > -1 ) {
-          // 已经有包裹元素，则去掉
-          if(this.value.indexOf("rich-innerHtml") > -1) {
-            nodeHtml =  new DOMParser().parseFromString(this.value,'text/html').body.childNodes[0]
-            msg = nodeHtml.firstChild.innerHTML
+          let originNode =  new DOMParser().parseFromString(this.value,'text/html').body.childNodes
+          // const nodeList = document.querySelectorAll(".ql-editor > *")
+          for(let i = originNode.length - 1; i >= 0; i --) {
+            if(originNode[i].localName === 'section') {
+              this.setRichText(originNode[i].outerHTML, 0)
+            } else {
+              this.quill.clipboard.dangerouslyPasteHTML(0, originNode[i].outerHTML)
+            }
           }
-          // 通过新blot，插入代码
-          this.setRichText(msg || this.value)
         } else {
           // 正常插入
           this.quill.clipboard.dangerouslyPasteHTML(this.value)
@@ -122,9 +122,9 @@ export default {
       this.$emit('change', { html, text, quill })
       this.$emit("getConetntLength", this.quill.getLength())
     },
-    setRichText(e) {
+    setRichText(e, t) {
       const index = this.selection?this.selection.index: 0
-      this.quill.insertEmbed(index ||  0, 'AppPanelEmbed', e)
+      this.quill.insertEmbed(t || index, 'AppPanelEmbed', e)
       this.visible = false
       this.visible2 = false
     },

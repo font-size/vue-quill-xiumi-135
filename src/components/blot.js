@@ -9,7 +9,7 @@ export default function (Quill) {
       // node.setAttribute('width', '100%');
       //   设置自定义html
       node.innerHTML = this.transformValue(value)
-      return node;
+      return node.firstChild;
     }
 
     static transformValue(value) {
