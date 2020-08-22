@@ -90,6 +90,7 @@ export default {
         })
       // 插入内容
       this.firstSetHtml()
+      this.listenPaste()
       this.$emit('ready', this.quill)
     },
     firstSetHtml() {
@@ -98,19 +99,40 @@ export default {
         if(this.value.indexOf('xiumi.us') > -1 || this.value.indexOf('135editor.com') > -1 ) {
           let originNode =  new DOMParser().parseFromString(this.value,'text/html').body.childNodes
           // const nodeList = document.querySelectorAll(".ql-editor > *")
-          for(let i = originNode.length - 1; i >= 0; i --) {
-            if(originNode[i].localName === 'section') {
-              this.setRichText(originNode[i].outerHTML, 0)
-            } else {
-              this.quill.clipboard.dangerouslyPasteHTML(0, originNode[i].outerHTML)
-            }
-          }
+          this.nodesInQuill(originNode)
+          // for(let i = originNode.length - 1; i >= 0; i --) {
+          //   if(originNode[i].localName === 'section') {
+          //     this.setRichText(originNode[i].outerHTML, 0)
+          //   } else {
+          //     this.quill.clipboard.dangerouslyPasteHTML(0, originNode[i].outerHTML)
+          //   }
+          // }
         } else {
           // 正常插入
           this.quill.clipboard.dangerouslyPasteHTML(this.value)
           // this.$refs.editor.children[0].innerHTML = this.value
         }
       }
+    },
+    nodesInQuill(originNode) {
+      for(let i = originNode.length - 1; i >= 0; i --) {
+        if(originNode[i].localName === 'section') {
+          this.setRichText(originNode[i].outerHTML, 0)
+        } else {
+          this.quill.clipboard.dangerouslyPasteHTML(0, originNode[i].outerHTML)
+        }
+      }
+    },
+    listenPaste() {
+      document.querySelector('.quill-editor').addEventListener('paste', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const msg = (e.clipboardData || window.clipboardData).getData('text/html')
+        const value = new DOMParser().parseFromString(msg,'text/html').body.childNodes
+        this.nodesInQuill(value)
+        console.log(value)
+        // this.setRichText(value)
+      })
     },
     // 更新text-change
     emitChange() {
