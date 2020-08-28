@@ -100,13 +100,6 @@ export default {
           let originNode =  new DOMParser().parseFromString(this.value,'text/html').body.childNodes
           // const nodeList = document.querySelectorAll(".ql-editor > *")
           this.nodesInQuill(originNode)
-          // for(let i = originNode.length - 1; i >= 0; i --) {
-          //   if(originNode[i].localName === 'section') {
-          //     this.setRichText(originNode[i].outerHTML, 0)
-          //   } else {
-          //     this.quill.clipboard.dangerouslyPasteHTML(0, originNode[i].outerHTML)
-          //   }
-          // }
         } else {
           // 正常插入
           this.quill.clipboard.dangerouslyPasteHTML(this.value)
@@ -125,13 +118,14 @@ export default {
     },
     listenPaste() {
       document.querySelector('.quill-editor').addEventListener('paste', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
         const msg = (e.clipboardData || window.clipboardData).getData('text/html')
-        const value = new DOMParser().parseFromString(msg,'text/html').body.childNodes
-        this.nodesInQuill(value)
-        console.log(value)
-        // this.setRichText(value)
+        if(msg) {
+          e.preventDefault();
+          e.stopPropagation();
+          const value = new DOMParser().parseFromString(msg,'text/html').body.childNodes
+          this.nodesInQuill(value)
+          this.setRichText(value)
+        }
       })
     },
     // 更新text-change
@@ -156,6 +150,7 @@ export default {
     showModal2() {
       this.visible2 = true
     }
+    
   }
 }
 </script>
