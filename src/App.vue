@@ -118,13 +118,12 @@ export default {
     },
     listenPaste() {
       document.querySelector('.quill-editor').addEventListener('paste', (e) => {
-        const msg = (e.clipboardData || window.clipboardData).getData('text/html')
-        if(msg) {
-          e.preventDefault();
-          e.stopPropagation();
-          const value = new DOMParser().parseFromString(msg,'text/html').body.childNodes
+        const msg = (e.clipboardData || window.clipboardData).getData('text/html') // 获取粘贴板文本
+        if(msg) { // 如果为空，则不拦截
+          e.preventDefault(); // 阻止复制动作
+          e.stopPropagation(); // 阻止冒泡
+          const value = new DOMParser().parseFromString(msg,'text/html').body.childNodes // 转成nodes
           this.nodesInQuill(value)
-          this.setRichText(value)
         }
       })
     },
