@@ -60,7 +60,7 @@ export default function (Quill) {
 
   * app.vue（template），src/app.vue
 
-``
+```
   <div class="quill-box" :style="{ height: fullheight + 'px'}">
     <a-modal v-model="visible" title="秀米" width="90%" :footer="null" :maskClosable="false" :centered="true" :keyboard="false">
       <div v-if="visible">
@@ -84,10 +84,11 @@ export default function (Quill) {
       <div class="editor" ref="editor"></div>
     </div>
   </div>
-``  
+```  
 
   * app.vue（部分methods），src/app.vue
-``
+  
+```
     setRichText(e) { // 通过新blot插入数据
       const index = this.selection?this.selection.index: 0
       this.quill.insertEmbed(index ||  0, 'AppPanelEmbed', e)
@@ -97,11 +98,11 @@ export default function (Quill) {
     showModal() {
       this.visible = true
     },
-`` 
+``` 
 
   * 修改秀米html中js，public\pluging\xiumi-ue-dialog-v5.html
 
-``
+```
     // 可以删掉页面上的internal.js引用了
     var parent = window.parent;
     var xiumi = document.getElementById('xiumi');
@@ -121,7 +122,7 @@ export default function (Quill) {
             // dialog.close(); --
         }
     }, false);
-``   
+```   
 
 ### 资源
 
