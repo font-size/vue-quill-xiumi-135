@@ -98,19 +98,10 @@ export default {
         // 判断是否有秀米和或135元素
         if(this.value.indexOf('xiumi.us') > -1 || this.value.indexOf('135editor.com') > -1 ) {
           let originNode =  new DOMParser().parseFromString(this.value,'text/html').body.childNodes
-          // const nodeList = document.querySelectorAll(".ql-editor > *")
           this.nodesInQuill(originNode)
-          // for(let i = originNode.length - 1; i >= 0; i --) {
-          //   if(originNode[i].localName === 'section') {
-          //     this.setRichText(originNode[i].outerHTML, 0)
-          //   } else {
-          //     this.quill.clipboard.dangerouslyPasteHTML(0, originNode[i].outerHTML)
-          //   }
-          // }
         } else {
           // 正常插入
           this.quill.clipboard.dangerouslyPasteHTML(this.value)
-          // this.$refs.editor.children[0].innerHTML = this.value
         }
       }
     },
@@ -125,13 +116,11 @@ export default {
     },
     listenPaste() {
       document.querySelector('.quill-editor').addEventListener('paste', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const msg = (e.clipboardData || window.clipboardData).getData('text/html')
-        const value = new DOMParser().parseFromString(msg,'text/html').body.childNodes
-        this.nodesInQuill(value)
-        console.log(value)
-        // this.setRichText(value)
+        e.preventDefault(); // 阻止复制动作
+        e.stopPropagation();// 阻止冒泡
+        const msg = (e.clipboardData || window.clipboardData).getData('text/html') // 获取粘贴板文本
+        const value = new DOMParser().parseFromString(msg,'text/html').body.childNodes // 获取nodes
+        this.nodesInQuill(value) // 根据不同标签，使用不同的插入方法
       })
     },
     // 更新text-change
