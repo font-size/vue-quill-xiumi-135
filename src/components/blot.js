@@ -9,6 +9,7 @@ export default function (Quill) {
       // node.setAttribute('width', '100%');
       //   设置自定义html
       node.innerHTML = this.transformValue(value)
+      // 返回firstChild，避免被包一层<div class='rich-innerHtml'></div>的无意义标签
       return node.firstChild;
     }
 
@@ -28,7 +29,7 @@ export default function (Quill) {
   AppPanelEmbed.blotName = 'AppPanelEmbed';
   // class名将用于匹配blot名称
   AppPanelEmbed.className = 'rich-innerHtml';
-  // 标签类型自定义
+  // 标签类型自定义，这玩意还必须加，去掉会报错
   AppPanelEmbed.tagName = 'div';
   Quill.register(AppPanelEmbed, true);
 }

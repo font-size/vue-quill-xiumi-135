@@ -48,23 +48,22 @@ export default {
     return {
       visible: false,
       visible2: false,
-      selection: {},
-      fullheight: document.documentElement.clientHeight,
-      // 待初始化的编辑器
-      quill: null,
+      selection: {}, // 光标位置
+      fullheight: document.documentElement.clientHeight, // 给quill容器设置了个高度
+      quill: null, // 待初始化的编辑器
       options: {
-          theme: 'snow',
+          theme: 'snow', // quill主题
           modules: {
-            // 工具栏的具体配置
-            toolbar: "#toolbar",
+            toolbar: "#toolbar",  // 工具栏的具体配置
           },
-          placeholder: '请输入内容...'
+          placeholder: '请输入内容...' // 占位符（quill 2.0.0-dev 这个版本占位符有bug）
         }
     }
   },
   mounted () {
     // 初始化编辑器
     this._initEditor()
+    // 把插入quill方法绑定到window上，给public\pluging\xiumi-ue-dialog-v5.html使用
     window.setRichText = this.setRichText
   },
   methods:{
@@ -74,7 +73,7 @@ export default {
       let editorDom = this.$el.querySelector('.editor')
       // 初始化编辑器
       this.quill = new Quill(editorDom, this.options)
-      // select
+      // 监听光标位置
       this.quill.on('selection-change', range => {
         this.selection = this.quill.getSelection()
         if (!range) {
@@ -90,10 +89,13 @@ export default {
         })
       // 插入内容
       this.firstSetHtml()
+      // 粘贴板监听
       this.listenPaste()
       this.$emit('ready', this.quill)
     },
+    // 回显内容时检查秀米代码
     firstSetHtml() {
+      // value 为回显内容
       if(this.value) {
         // 判断是否有秀米和或135元素
         if(this.value.indexOf('xiumi.us') > -1 || this.value.indexOf('135editor.com') > -1 ) {
@@ -107,15 +109,19 @@ export default {
         }
       }
     },
+    // 根据node类型分发处理
     nodesInQuill(originNode) {
       for(let i = originNode.length - 1; i >= 0; i --) {
         if(originNode[i].localName === 'section') {
+          // 秀米类型代码，走新blot
           this.setRichText(originNode[i].outerHTML, 0)
         } else {
+          // 正常插入
           this.quill.clipboard.dangerouslyPasteHTML(0, originNode[i].outerHTML)
         }
       }
     },
+    // 监听粘贴板
     listenPaste() {
       document.querySelector('.quill-editor').addEventListener('paste', (e) => {
         const msg = (e.clipboardData || window.clipboardData).getData('text/html') // 获取粘贴板文本
@@ -129,23 +135,31 @@ export default {
     },
     // 更新text-change
     emitChange() {
+      // 获取到quill 根dom中的html
       let html = this.$refs.editor.children[0].innerHTML
       const quill = this.quill
       const text = this.quill.getText()
       if (html === '<p><br></p>') html = ''
+      // v-model相关
       this.$emit('input', html)
       this.$emit('change', { html, text, quill })
+      // 长度（注意：这个方法无法计算相关秀米代码的中的文字数量）
       this.$emit("getConetntLength", this.quill.getLength())
     },
     setRichText(e, t) {
+      // 插入位置
       const index = this.selection?this.selection.index: 0
+      // 自定义的blot 通道，参数分别是插入位置，blot名称，插入数据
       this.quill.insertEmbed(t || index, 'AppPanelEmbed', e)
+      // 插入成功后，不管有没有用到a-modal，设置为false就对了
       this.visible = false
       this.visible2 = false
     },
+    // 秀米 modal
     showModal() {
       this.visible = true
     },
+    // 135 modal
     showModal2() {
       this.visible2 = true
     }

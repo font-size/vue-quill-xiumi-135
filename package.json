@@ -1,7 +1,9 @@
 {
   "name": "quill-xiumi-135",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "description": "在quill中集成秀米",
+  "author": "licheng",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
