@@ -7,7 +7,11 @@
   * 通过在toolbar中添加按钮，以弹窗的方式弹出秀米编辑器和135编辑器。
   * 实现复制进去的秀米等文章也能在quill中正常显示
 
-<a href="http://www.lichengblog.com/demo/quill-xiumi-135/index.html" target="_blank">在线预览</a>
+<a href="http://www.lichengblog.com/demo/quill-xiumi-135/index.html" target="_blank">效果在线预览</a>
+
+  * 如果只是想使用集成有秀米的quill编辑器，那么选择在项目中下载npm包会更合适
+
+<a href="https://www.npmjs.com/package/vue-quill-xiumi" target="_blank">npm 地址</a>
 
 ## 部分代码
 
