@@ -13,6 +13,15 @@
 
 <a href="https://www.npmjs.com/package/vue-quill-xiumi" target="_blank">vue-quill-xiumi npm地址</a>
 
+## 运行项目
+
+  * 拉取项目，安装npm包依赖，再执行npm run serve运行项目
+
+```
+npm i
+
+npm run serve
+```
 ## 部分代码
 
   * 自定义blot（作为防过滤秀米代码的通道），src/components/blot.js
