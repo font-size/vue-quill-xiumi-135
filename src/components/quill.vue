@@ -25,14 +25,14 @@
 </template>
 
 <script>
-  // 引入原始组件
-  import * as Quill from 'quill'
-  // 引入核心样式和主题样式
-  import 'quill/dist/quill.core.css'
-  import 'quill/dist/quill.snow.css'
-  // 引入自定义blot
-  import blotSelect from './blot'
-  blotSelect(Quill)
+// 引入原始组件
+import * as Quill from 'quill'
+// 引入核心样式和主题样式
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+// 引入自定义blot
+import blotSelect from './blot'
+blotSelect(Quill)
 
 export default {
   name: 'quill-xiumi-135',

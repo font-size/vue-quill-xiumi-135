@@ -15,7 +15,7 @@
     "fontmin": "^0.9.8",
     "quill": "^1.3.6",
     "vue": "^2.6.11",
-    "vue-quill-xiumi": "^0.1.5"
+    "vue-quill-xiumi": "^0.1.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.0",
