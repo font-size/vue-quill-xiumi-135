@@ -12,12 +12,54 @@
     </a-modal>
     <div class="quill-editor">
       <div id="toolbar" slot="toolbar">
-        <!-- Add a bold button -->
-        <button class="ql-bold" title="加粗"></button>
-        <!-- Add a 秀米 button -->
-        <button id="custom-button-xiumi" title="秀米" @click="showModal"></button>
-        <!-- Add a 135 button -->
-        <button id="custom-button-135" title="135编辑器" @click="showModal2"></button>
+        <!-- Add some buttons -->
+        <!-- <button class="ql-bold" title="加粗"></button> -->
+        <span class="ql-formats">
+          <select class="ql-font"></select>
+          <select class="ql-size"></select>
+        </span>
+        <span class="ql-formats">
+          <button class="ql-bold"></button>
+          <button class="ql-italic"></button>
+          <button class="ql-underline"></button>
+          <button class="ql-strike"></button>
+        </span>
+        <span class="ql-formats">
+          <select class="ql-color"></select>
+          <select class="ql-background"></select>
+        </span>
+        <span class="ql-formats">
+          <button class="ql-script" value="sub"></button>
+          <button class="ql-script" value="super"></button>
+        </span>
+        <span class="ql-formats">
+          <button class="ql-header" value="1"></button>
+          <button class="ql-header" value="2"></button>
+          <button class="ql-blockquote"></button>
+          <button class="ql-code-block"></button>
+        </span>
+        <span class="ql-formats">
+          <button class="ql-list" value="ordered"></button>
+          <button class="ql-list" value="bullet"></button>
+          <button class="ql-indent" value="-1"></button>
+          <button class="ql-indent" value="+1"></button>
+        </span>
+        <span class="ql-formats">
+          <button class="ql-direction" value="rtl"></button>
+          <select class="ql-align"></select>
+        </span>
+        <span class="ql-formats">
+          <button class="ql-link"></button>
+          <button class="ql-image"></button>
+          <button class="ql-video"></button>
+          <button class="ql-formula"></button>
+        </span>
+        <span class="ql-formats">
+          <!-- Add a 秀米 button -->
+          <button id="custom-button-xiumi" title="秀米" @click="showModal"></button>
+          <!-- Add a 135 button -->
+          <button id="custom-button-135" title="135编辑器" @click="showModal2"></button>
+        </span>
       </div>
       <div class="editor" ref="editor"></div>
     </div>
@@ -188,15 +230,15 @@ export default {
   position: relative;
 }
 #custom-button-xiumi {
-  background-image: url('http://xiumi.us/connect/ue/xiumi-connect-icon.png');
+  background-image: url('../assets/img/xiumi-connect-icon.png');
 }
 #custom-button-xiumi:hover {
-  background-image: url('http://xiumi.us/connect/ue/xiumi-connect-icon.png');
+  background-image: url('../assets/img/xiumi-connect-icon.png');
 }
 #custom-button-135 {
-  background-image: url('http://static.135editor.com/img/icons/editor-135-icon.png');
+  background-image: url('../assets/img/editor-135-icon.png');
 }
 #custom-button-135:hover {
-  background-image: url('http://static.135editor.com/img/icons/editor-135-icon.png');
+  background-image: url('../assets/img/editor-135-icon.png');
 }
 </style>
