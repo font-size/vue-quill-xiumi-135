@@ -25,34 +25,18 @@
 <script>
   var editor135 = document.getElementById('editor135');
   var parent = window.parent;
-  // window.onload = function () {
-	 //  setTimeout(function(){
-		//   editor135.contentWindow.postMessage(editor.getContent(),'*');
-	 //  },3000);    
-  // };
-  //iframe加载完成后，立即加载内容
-  if (editor135.attachEvent) {
-      editor135.attachEvent("onload", function() {
-        setTimeout(function(){
-          editor135.contentWindow.postMessage(parent.getHtml(),'*');
-        },0);    
-      });
-  } else {
-    // 兼容ie
-      editor135.onload = function() {
-        setTimeout(function(){
-          editor135.contentWindow.postMessage(parent.getHtml(),'*');
-        },0);    
-      };
-  }
-
+  window.onload = function () {
+	  setTimeout(function(){
+      editor135.contentWindow.postMessage(parent.getHtml(),'*');
+      // parent.getHtml 其实是quill里暴露的 window.getHtml
+	  }, 3000);    
+  };
   document.addEventListener("mousewheel", function (event) {
     event.preventDefault();
     event.stopPropagation();
   });
   window.addEventListener('message', function (event) {
       if (typeof event.data !== 'string') return;
-      
       parent.setRichText(event.data)
       // editor.setContent(event.data);
       // editor.fireEvent("catchRemoteImage"); 

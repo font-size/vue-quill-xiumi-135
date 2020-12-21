@@ -107,6 +107,8 @@ export default {
     this._initEditor()
     // 暴露方法绑定到window上，给public\pluging\xiumi-ue-dialog-v5.html使用
     window.setRichText = this.setRichText
+    // 调用135页面的时候 带入数据 getHtml()
+    window.getHtml = this.getHtml 
   },
   methods:{
     // 初始化编辑器
@@ -206,6 +208,10 @@ export default {
     // 135 modal
     showModal2() {
       this.visible2 = true
+    },
+    // 获取html内容
+    getHtml() {
+      return this.$refs.editor.children[0].innerHTML
     }
     
   }
