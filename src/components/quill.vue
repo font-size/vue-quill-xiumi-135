@@ -2,7 +2,7 @@
   <div class="quill-box" :style="{ height: fullheight + 'px'}">
     <a-modal v-model="visible" title="秀米" width="90%" :footer="null" :maskClosable="false" :centered="true" :keyboard="false">
       <div v-if="visible">
-        <iframe src="./pluging/xiumi-ue-dialog-v5.html" frameborder="0" width="100%" :height="(fullheight - 150)+'px'" id="xiumiIframe"></iframe>
+        <iframe src="./pluging/xiumi-ue-dialog-v5_new.html" frameborder="0" width="100%" :height="(fullheight - 150)+'px'" id="xiumiIframe"></iframe>
       </div>
     </a-modal>
     <a-modal v-model="visible2" title="135编辑器" width="90%" :footer="null" :maskClosable="false" :centered="true" :keyboard="false">
