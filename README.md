@@ -9,13 +9,7 @@
 
 <a href="http://www.lichengblog.com/demo/quill-xiumi-135/index.html" target="_blank">效果在线预览</a>
 
-  * 如果只是想使用集成有秀米的quill编辑器，那么选择下载npm包会更合适。
-
-<a href="https://www.npmjs.com/package/vue-quill-xiumi" target="_blank">vue-quill-xiumi npm地址</a>
-
 ## 运行项目
-
-  * 拉取项目，安装npm包依赖，再执行npm run serve运行项目
 
 ```
 npm i
@@ -136,6 +130,10 @@ export default function (Quill) {
         }
     }, false);
 ```   
+## tips
+
+- 秀米官方更新后，在本地开发环境时，无法正常插入数据到编辑器；且在ip环境下无法登录秀米。
+- 秀米里的图片插入编辑器前需要做本地化处理，不然无法正常显示图片（被秀米锁图）。
 
 ### 资源
 
